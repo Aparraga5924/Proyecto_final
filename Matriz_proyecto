@@ -1,0 +1,73 @@
+// Realizar el análisis de complejidad del algoritmo
+//De su proyecto de medio ciclo mejorado realice el análisis de estimación de costes del proyecto (análisis de sus complejidad de los métodos y el programa)
+
+
+//PROGRAMA
+
+public class Matriz_pro {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in); /*1*/
+
+        // Pedir al usuario la cantidad de números a ingresar
+        System.out.print("Ingrese el tamaño de la matriz: "); /*2*/
+        int tamaño = sc.nextInt(); /*3*/
+        int M = tamaño; // Tamaño de la matriz
+
+        System.out.println("El triángulo A se ve de esta manera: "); /*4*/
+        imprimirTrianguloA(M); /*5*/
+        System.out.println(""); /*6*/
+        System.out.println("El triángulo B se ve de esta manera: "); /*7*/
+        imprimirTrianguloB(M); /*8*/
+    }
+}
+
+//METODO 1 (imprimirTrianguloA)
+
+public static void imprimirTrianguloA(int M) {
+    char[][] matriz = new char[M][M];
+
+    for (int i = 0; i < M; i++) {  /*1*/
+        for (int j = 0; j <= i; j++) {  /*2*/
+            matriz[i][j] = '*';  /*3*/
+        }
+    }
+
+    // Imprimir la matriz
+    for (int i = 0; i < M; i++) {  /*4*/
+        for (int j = 0; j < M; j++) {  /*5*/
+            if (matriz[i][j] == '*') {  /*6*/
+                System.out.print("* ");  /*7*/
+            } else {
+                System.out.print("  ");  /*8*/
+            }
+        }
+        System.out.println();  /*9*/
+    }
+}
+
+
+
+//METODO 2 (imprimirTrianguloB)
+
+public static void imprimirTrianguloB(int M) {
+    char[][] matriz = new char[M][M];
+
+    for (int i = 0; i < M; i++) {  /*1*/
+        for (int j = 0; j < M - i; j++) {  /*2*/
+            matriz[i][j] = '*';  /*3*/
+        }
+    }
+
+    // Imprimir la matriz
+    for (int i = 0; i < M; i++) {  /*4*/
+        for (int j = 0; j < M; j++) {  /*5*/
+            if (matriz[i][j] == '*') {  /*6*/
+                System.out.print("* ");  /*7*/
+            } else {
+                System.out.print("  ");  /*8*/
+            }
+        }
+        System.out.println();  /*9*/
+    }
+}
