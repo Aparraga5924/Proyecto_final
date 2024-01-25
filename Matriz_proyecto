@@ -1,9 +1,8 @@
-// Realizar el análisis de complejidad del algoritmo
-//De su proyecto de medio ciclo mejorado realice el análisis de estimación de costes del proyecto (análisis de sus complejidad de los métodos y el programa)
+Realizar el análisis de complejidad del algoritmo
+De su proyecto de medio ciclo mejorado realice el análisis de estimación de costes del proyecto (análisis de sus complejidad de los métodos y el programa)
 
-
-//PROGRAMA
-
+//PROGRAMA PRINCIPAL
+//PROGRAMA PRINCIPAL
 public class Matriz_pro {
 
     public static void main(String[] args) {
@@ -12,15 +11,56 @@ public class Matriz_pro {
         // Pedir al usuario la cantidad de números a ingresar
         System.out.print("Ingrese el tamaño de la matriz: "); /*2*/
         int tamaño = sc.nextInt(); /*3*/
-        int M = tamaño; // Tamaño de la matriz
+        int M = tamaño; // Tamaño de la matriz /*4*/
 
-        System.out.println("El triángulo A se ve de esta manera: "); /*4*/
-        imprimirTrianguloA(M); /*5*/
-        System.out.println(""); /*6*/
-        System.out.println("El triángulo B se ve de esta manera: "); /*7*/
-        imprimirTrianguloB(M); /*8*/
+        // Imprimir el triángulo A
+        System.out.println("El triángulo A se ve de esta manera: "); /*5*/
+        imprimirTrianguloA(M); /*6*/
+
+        System.out.println(""); /*7*/
+
+        // Imprimir el triángulo B
+        System.out.println("El triángulo B se ve de esta manera: "); /*8*/
+        imprimirTrianguloB(M); /*9*/
     }
 }
+
+Si se analiza el número de asignaciones, operaciones y comparaciones que se realizan en cada una de las líneas del algoritmo se obtiene:
+/*1*/ ta  // Operación de asignación
+/*2*/ ta  // Operación de asignación
+/*3*/ tc  // Operación de entrada de datos
+/*4*/ to + ta  // Operación aritmética y de asignación
+/*5*/ to + ta  // Operación aritmética y de asignación
+/*6*/ tc  // Operación de salida de datos
+/*7*/ N/A // No hay operación en esta línea
+/*8*/ N/A // No hay operación en esta línea
+/*9*/ N/A // No hay operación en esta línea
+
+TIEMPO =    2⋅ta+M⋅(tc+2⋅ta)+M⋅(M⋅(to+ta)+tc+2⋅ta)+M⋅(M⋅(to+ta)+tc+2⋅ta)+M⋅tc+M⋅tc+M⋅tc+M
+
+1.Tiempo Mejor esperado
+En el mejor caso, la condición del bucle siempre se evalúa como falso, lo que significa que el elemento x no está en la matriz. Por lo tanto, la asignación en la línea 6 no se realiza nunca.
+
+La expresión del tiempo mejor esperado sería:
+Tm = 2 * ta + M * (tc + 2 * ta) + tc
+
+2.Tiempo Peor esperado
+En el peor caso, la condición del bucle siempre se evalúa como verdadero, lo que significa que la asignación en la línea 6 se realiza en cada iteración del bucle.
+
+La expresión del tiempo peor esperado sería:
+Tp = 2 * ta + M * (M * (tc + 2 * ta) + tc + 2 * ta) + M * (M * (tc + 2 * ta) + tc + 2 * ta) + M * tc + M * tc + M * tc + M
+
+3.Tiempo esperado.
+En el caso medio, se asume que la probabilidad de encontrar el elemento x en cualquier posición del vector es igual.
+
+En este caso, la expresión del tiempo esperado sería una media ponderada entre los casos mejor y peor.
+Tµ = Pm * Tm + (1 - Pm) * Tp
+
+
+
+
+
+
 
 //METODO 1 (imprimirTrianguloA)
 
@@ -46,6 +86,48 @@ public static void imprimirTrianguloA(int M) {
     }
 }
 
+Si se analiza el número de asignaciones, operaciones y comparaciones que se realizan en cada una de las líneas del algoritmo se obtiene:
+/*1*/ ta
+/*2*/ ta
+/*3*/ M * (tc + 2 * ta)
+/*4*/ M * (M * (to + ta) + tc + 2 * ta)
+/*5*/ M * (M * (to + ta) + tc + 2 * ta)
+/*6*/ M * tc
+/*7*/ M * tc
+/*8*/ M * tc
+/*9*/ M
+
+
+TIEMPO  = 2 * ta + M * (tc + 2 * ta) + M * (M * (to + ta) + tc + 2 * ta) + M * (M * (to + ta) + tc + 2 * ta) + M * tc + M * tc + M * tc + M
+
+1.Tiempo Mejor esperado
+En el mejor caso, el bucle más interno (línea 2) nunca se ejecuta completamente, ya que la condición j <= i puede ser falsa en la primera iteración.
+La expresión del tiempo mejor esperado sería:
+Tm = 2 * ta + M * (tc + 2 * ta) + tc = A * M + B
+
+2.Tiempo Peor esperado
+En el peor caso, el bucle más interno se ejecuta completamente en cada iteración, ya que la condición j <= i siempre es verdadera.
+presión del tiempo peor esperado sería:
+
+Tp =  Tp = 2 * ta + M * (M * (tc + 2 * ta) + tc + 2 * ta) + M * (M * (tc + 2 * ta) + tc + 2 * ta) + M * tc + M * tc + M * tc + M
+
+3.- Tiempo esperado.
+En el caso medio, asumimos una probabilidad uniforme de ejecución para cada valor de i y j.
+La expresión del tiempo esperado sería una media ponderada entre los casos mejor y peor:
+Tµ = Pm * Tm + (1 - Pm) * Tp
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //METODO 2 (imprimirTrianguloB)
@@ -69,5 +151,36 @@ public static void imprimirTrianguloB(int M) {
             }
         }
         System.out.println();  /*9*/
-    }
 }
+
+Si se analiza el número de asignaciones, operaciones y comparaciones que se realizan en cada una de las líneas del algoritmo se obtiene:
+/*1*/ ta
+/*2*/ ta
+/*3*/ M * (tc + 2 * ta)
+/*4*/ M * (M * (to + ta) + tc + 2 * ta)
+/*5*/ M * (M * (to + ta) + tc + 2 * ta)
+/*6*/ M * tc
+/*7*/ M * tc
+/*8*/ M * tc
+/*9*/ M
+
+TIEMPO = 2 * ta + M * (tc + 2 * ta) + M * (M * (to + ta) + tc + 2 * ta) + M * (M * (to + ta) + tc + 2 * ta) + M * tc + M * tc + M * tc + M
+
+1.Tiempo Mejor esperado
+En el mejor caso, el bucle más interno (línea 2) nunca se ejecuta completamente, ya que la condición j <= i puede ser falsa en la primera iteración.
+La expresión del tiempo mejor esperado sería:
+
+Tm = 2 * ta + M * (tc + 2 * ta) + tc
+
+2.Tiempo Peor esperado
+En el peor caso, el bucle más interno se ejecuta completamente en cada iteración, ya que la condición j <= i siempre es verdadera.
+presión del tiempo peor esperado sería:
+
+Tp = 2 * ta + M * (M * (tc + 2 * ta) + tc + 2 * ta) + M * (M * (tc + 2 * ta) + tc + 2 * ta) + M * tc + M * tc + M * tc + M
+
+3.- Tiempo esperado.
+En el caso medio, asumimos una probabilidad uniforme de ejecución para cada valor de i y j.
+La expresión del tiempo esperado sería una media ponderada entre los casos mejor y peor:
+
+Tµ = Pm * Tm + (1 - Pm) * Tp
+
